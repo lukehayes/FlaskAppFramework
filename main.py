@@ -1,9 +1,7 @@
 from flask import Flask, url_for, request, render_template
 from app.database import Database
-import pprint
 
 app = Flask(__name__)
-
 db = Database()
 
 @app.route("/")
