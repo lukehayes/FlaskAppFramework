@@ -8,7 +8,7 @@ class Database(object):
 
     """
     def __init__(self, db_name = 'db.sqlite'):
-        self._connection = sqlite3.connect(db_name)
+        self._connection = sqlite3.connect(db_name, check_same_thread=False)
 
     def close(self):
         """Close the connection to the database."""
