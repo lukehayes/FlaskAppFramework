@@ -1,17 +1,41 @@
-from flask import Flask, url_for, request, render_template
+from flask import Flask, url_for, request, render_template, redirect, flash
 from app.database import Database
+import os
+import pprint
 
 app = Flask(__name__)
+# Session need a secret key to work
+app.config.update(SECRET_KEY=os.urandom(24))
+
 db = Database()
 
 @app.route("/")
 def index():
-    data = db.all("data")
-    return render_template("hello.html", d = data)
+    users = db.find("users", "developer")
+    return render_template("hello.html", users = users)
 
-@app.route("/about")
-def about():
-    return "About"
+@app.route("/login", methods=['GET', 'POST'])
+def login():
+
+    error = None
+
+    if request.method == 'POST':
+        user = db.find("users", request.form['username'])
+        pprint.pprint(user)
+
+        if len(user) == 0:
+            flash("User could not be found.")
+            return redirect(url_for('login'))
+        else:
+            if request.form['password'] == "password":
+                return redirect(url_for('index'))
+            else:
+                flash("The password was incorrect. Try again.")
+                return redirect(url_for('login'))
+
+
+
+    return render_template("login.html", error = error)
 
 # with app.test_request_context():
     # print("Loaded")
