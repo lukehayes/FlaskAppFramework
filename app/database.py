@@ -12,6 +12,7 @@ class Database(object):
 
         Args:
             name (str): The name of the database - defaults to 'db.sqlite'
+
         """
         self._connection = sqlite3.connect(db_name, check_same_thread=False)
 
@@ -26,6 +27,7 @@ class Database(object):
 
         Returns:
             None
+
         """
         self._connection.close()
 
@@ -43,5 +45,12 @@ class Database(object):
         """
         queryString = "select * from " + table_name
         query = self.cursor.execute(queryString)
-        pprint.pprint(type(query.fetchall()))
         return query.fetchall()
+
+    def find(self, table_name, value):
+        queryString = "select * from {} where username = '{}';".format(table_name, value)
+        query = self.cursor.execute(queryString)
+        return query.fetchall()
+
+
+
