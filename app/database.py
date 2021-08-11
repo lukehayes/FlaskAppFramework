@@ -10,7 +10,8 @@ class Database(object):
         """
         Constructor.
 
-        :param str name: The name of the database - defaults to 'db.sqlite'
+        Args:
+            name (str): The name of the database - defaults to 'db.sqlite'
         """
         self._connection = sqlite3.connect(db_name, check_same_thread=False)
 
@@ -20,15 +21,27 @@ class Database(object):
         self.cursor = self._connection.cursor()
 
     def close(self):
-        """Close the connection to the database."""
+        """
+        Close the connection to the database.
+
+        Returns:
+            None
+        """
         self._connection.close()
 
     def all(self, table_name):
         """
         Run a select * on a specific table.
 
-        :param str table_name: The name of the table
+        Args:
+            table_name (str): The name of the table
+            name       (str): The name of the database - defaults to 'db.sqlite'
+
+        Returns:
+            list. Each row that is returned from the query.
+
         """
         queryString = "select * from " + table_name
         query = self.cursor.execute(queryString)
+        pprint.pprint(type(query.fetchall()))
         return query.fetchall()
