@@ -1,4 +1,4 @@
-DROP TABLE data;
+DROP TABLE if exists data;
 
 CREATE TABLE data(id integer, name text, number integer);
 
