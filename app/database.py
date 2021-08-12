@@ -61,7 +61,7 @@ class Database(object):
         """
         queryString = 'select * from {} where username = "{}" limit 1;'.format(table_name, value)
         query = self.cursor.execute(queryString)
-        return query.fetchall()
+        return query.fetchone()
 
 
 
