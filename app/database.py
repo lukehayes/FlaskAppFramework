@@ -29,7 +29,8 @@ class Database(object):
             None
 
         """
-        self._connection.close()
+        if self._connection is not None:
+            self._connection.close()
 
     def all(self, table_name):
         """
