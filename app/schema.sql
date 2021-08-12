@@ -14,7 +14,7 @@ INSERT INTO data(id, name, number) VALUES
 CREATE TABLE users(id integer, username text, email integer, password text);
 
 INSERT INTO users(id, username, email, password) VALUES
-    (1, "developer", "developer@app.com", "password"),
-    (2, "admin", "admin@app.com", "password"),
+    (1, "developer", "developer@app.com", "developer"),
+    (2, "admin", "admin@app.com", "admin"),
     (3, "testuser", "testuser@app.com", "password");
 
