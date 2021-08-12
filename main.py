@@ -20,14 +20,16 @@ def login():
     error = None
 
     if request.method == 'POST':
-        user = db.find("users", request.form['username'])
-        pprint.pprint(user)
+        userObject = db.find("users", request.form['username'])
+        # Turn the sqlite.Row object into a dict
+        user = dict(zip(userObject.keys(), userObject))
 
-        if len(user) == 0:
+        if len(userObject) == 0:
             flash("User could not be found.")
             return redirect(url_for('login'))
         else:
-            if request.form['password'] == "password":
+            if request.form['password'] == user['password']:
+                return render_template("hello.html", user = userObject)
                 return redirect(url_for('index'))
             else:
                 flash("The password was incorrect. Try again.")
