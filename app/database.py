@@ -48,7 +48,7 @@ class Database(object):
         return query.fetchall()
 
     def find(self, table_name, value):
-        queryString = "select * from {} where username = '{}';".format(table_name, value)
+        queryString = 'select * from {} where username = "{}" limit 1;'.format(table_name, value)
         query = self.cursor.execute(queryString)
         return query.fetchall()
 
