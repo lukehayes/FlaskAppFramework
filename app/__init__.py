@@ -3,6 +3,7 @@ from flask import Flask
 
 def create_app(test_config=None):
 
+    # Flask Initialization
     app = Flask(__name__, instance_relative_config=True)
     app.config.from_mapping(
         SECRET_KEY='dev',
@@ -19,6 +20,13 @@ def create_app(test_config=None):
     except OSError:
         pass
 
+
+    # Blueprint Initialization
+    from . import auth
+    app.register_blueprint(auth.bp)
+
+
+    # Routes
     @app.route('/')
     def index():
         return "Hello"
