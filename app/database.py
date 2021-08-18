@@ -64,5 +64,21 @@ class Database(object):
         query = self.cursor.execute(queryString)
         return query.fetchone()
 
+    def raw_query(self, query_string):
+        """
+        Execute a raw SQL statement for testing purposes.
+
+        !!! NOT SECURE !!!
+
+        Args:
+            query_string (str): The sql query.
+
+        Returns:
+            list. A single row if value is found. An empty list otherwise.
+        """
+        query = self.cursor.execute(query_string)
+        return query.fetchone()
+
+
 
 
