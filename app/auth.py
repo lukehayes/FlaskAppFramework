@@ -32,4 +32,4 @@ def register():
 
 @bp.route('/login', methods = ['GET', 'POST'])
 def login():
-    return "Login Route. Needs to be implemented."
+    return render_template('auth/login.html')
