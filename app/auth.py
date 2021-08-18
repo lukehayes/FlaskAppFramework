@@ -17,16 +17,20 @@ def register():
 
     if request.method == 'POST':
         username = request.form['username']
+        email    = request.form['email']
         password = request.form['password']
         db = Database()
         error = None
 
         if not username:
             error = 'The username is missing.'
+        if not email:
+            error = 'The email is missing.'
         if not password:
             error = 'The password is missing.'
 
         if error is None:
+            db.insert_user(username, email, generate_password_hash(password))
             print("Running database queries...")
 
     return render_template('auth/register.html')
@@ -54,4 +58,10 @@ def login():
 
         flash(error)
     return render_template('auth/login.html')
+
+
+@bp.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('index'))
 
