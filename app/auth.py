@@ -28,3 +28,8 @@ def register():
             print("Running database queries...")
 
     return render_template('auth/register.html')
+
+
+@bp.route('/login', methods = ['GET', 'POST'])
+def login():
+    return "Login Route. Needs to be implemented."
