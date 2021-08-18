@@ -79,6 +79,7 @@ class Database(object):
         query = self.cursor.execute(query_string)
         return query.fetchone()
 
-
+    def __del__(self):
+        self.close()
 
 
