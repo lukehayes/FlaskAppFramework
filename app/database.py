@@ -48,6 +48,25 @@ class Database(object):
         query = self.cursor.execute(queryString)
         return query.fetchall()
 
+    def insert_user(self, username, email, password):
+        """
+        Insert a user into the database.
+
+        Args:
+            username (str): The name of the user
+            email    (str): The email of the user
+            password (str): The password of the user
+
+        Returns:
+            None
+
+        """
+        query_string = "insert into users(username, email, password) values(?, ? ,?)"
+        query = self.cursor.execute(query_string, (username, email, password))
+        self._connection.commit()
+        # return query.fetchall()
+
+
     def find(self, table_name, value):
         """
         Find a specific row from the database using a specified value.
