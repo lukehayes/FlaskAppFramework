@@ -35,17 +35,12 @@ def login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-
         db = Database()
         error = None
 
-        print(generate_password_hash("password"))
-
         query = 'SELECT * FROM users WHERE username = "{}"'.format(username)
         print(query)
-
-        user = db.raw_query(
-            'SELECT * FROM users WHERE username = "developer"')
+        user = db.raw_query(query)
 
         if user is None:
             error = 'Incorrect username.'
