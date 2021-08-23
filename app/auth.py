@@ -65,3 +65,9 @@ def logout():
     session.clear()
     return redirect(url_for('index'))
 
+@bp.route('/users')
+def users():
+    db = Database()
+    users = db.all("users")
+    return render_template('auth/users.html', users = users)
+
