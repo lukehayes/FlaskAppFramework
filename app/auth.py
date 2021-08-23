@@ -31,7 +31,8 @@ def register():
 
         if error is None:
             db.insert_user(username, email, generate_password_hash(password))
-            print("Running database queries...")
+            flash("New User Created")
+            return render_template('index.html')
 
     return render_template('auth/register.html')
 
